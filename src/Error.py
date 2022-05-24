@@ -11,54 +11,6 @@ from typing import Any, Dict, List, Tuple
 ############################## CLASSES ########################################
 ###############################################################################
 
-class Asset:
-
-    """
-    This class represents an asset.
-    """
-
-    def __init__(self : Asset, asset : str) -> Asset:
-        """
-        Creates a new asset.
-
-        :param asset: The name of the asset.
-        """
-        self.name : str = asset.upper()
-
-        # short names
-        self.n : str = self.name
-
-class Pair:
-
-    """
-    This class represents a pair of assets.
-    """
-    
-    def __init__(self : Pair, asset_1 : Asset, asset_2 : Asset) -> Pair:
-        """
-        Creates a new pair of assets.
-
-        :param asset_1: The first asset.
-        :param asset_2: The second asset.
-        """
-        self.asset_1 : Asset = asset_1
-        self.asset_2 : Asset = asset_2
-        
-        # short names
-        self.a1 : Asset = self.asset_1
-        self.a2 : Asset = self.asset_2
-
-        self.name : str = self.get_pair_name()
-        self.n : str = self.name
-
-    def get_pair_name(self : Pair) -> str:
-        """
-        Returns the concat name of both assets.
-
-        :returns: The concat name of both assets.
-        """
-        return min(self.a1.n, self.a2.n) + max(self.a1.n, self.a2.n)
-
 class ErrorType(Enum):
 
     """
@@ -116,30 +68,3 @@ class Error:
             if error.value == error:
                 return error
         return ErrorType.UNKNOWN_ERROR
-
-
-class Response:
-
-    """
-    Response from a KrakenAPI method.
-    """
-
-    def __init__(self : Response, key : str) -> Response:
-        """
-        Creates a new response error.
-
-        :param key: The key that was used to get the response.
-        :param result: the result, if any.
-        :param error: The error, if any.
-        """
-        self.key : str = key
-        self.result : Any = None
-        self.error : Error = None
-
-###############################################################################
-############################## FUNCTIONS ######################################
-###############################################################################
-
-###############################################################################
-############################## MAIN ###########################################
-###############################################################################
