@@ -7,6 +7,7 @@ import hashlib
 import hmac
 import base64
 
+from DataStructures import ErrorType, Pair, Asset, Error, Response
 from typing import Any, Dict, List, Tuple
 
 ###############################################################################
@@ -94,8 +95,8 @@ class KrakenAPI:
     ############################### GETTERS ###################################
     ###########################################################################
 
-    def generic_getter(self : KrakenAPI, json : Dict[str, Any], element : str, *,
-                       try_altname : bool = False) -> Tuple[str, Any]:
+    def generic_getter(self : KrakenAPI, cached : Response, element : str, *,
+                       try_altname : bool = True) -> Response:
         """
         Generic getter that works most of the time.
 
@@ -104,42 +105,61 @@ class KrakenAPI:
 
         :return: A tuple of the key that worked and the element.
         """
+        resp = Response(element)
+        json = cached.result
+
+        if cached.error is not None:
+            return cached
+
         # check for errors
         if json["error"] != []:
             print("Some error occurred:")
             print(json["error"])
-            return None
+            resp.error = Error(json["error"])
+            return resp
 
         # direct check
         if element in json["result"]:
-            return (element, json["result"][element])
+            resp.result = json["result"][element]
+            return resp
 
         # check altname, if requested
         if try_altname:
             result = json["result"]
             for key in result:
                 if "altname" in result[key] and result[key]["altname"] == element:
-                    return (key, result[key])
+                    resp.result = result[key]
+                    return resp
 
         print("Requested element is not listed...")
-        return None
+        resp.error = ErrorType.UNKNOWN_ERROR
+        return resp
 
     ###########################################################################
     ############################### BALANCE ###################################
     ###########################################################################
 
-    def _get_balance(self : KrakenAPI) -> Any:
+    def _get_balance(self : KrakenAPI) -> Response:
         """
         Returns your balance.
         """
-        return self.private_kraken_request(
+        resp = Response("")
+
+        json = self.private_kraken_request(
                     "/0/private/Balance", 
                     {
                         "nonce": KrakenAPI.get_nonce()
                     }
                 )
 
-    def get_balance(self : KrakenAPI, currency : str, balance : Any = None) -> int:
+        if json["error"] != []:
+            resp.error = Error(json["error"])
+            return resp
+
+        resp.result = json["result"]
+        return resp
+
+    def get_balance(self : KrakenAPI, asset : Asset, balance : Response = None) -> Response:
         """
         Wrapper returning the balance of the requested currency.
 
@@ -149,10 +169,10 @@ class KrakenAPI:
 
         :returns: The balance of the requested currency, 0 is the default case.
         """
-        balance = self._get_balance().json() if balance is None else balance.json()
-        return self.generic_getter(balance, currency, try_altname=True)
+        balance = self._get_balance() if balance is None else balance
+        return self.generic_getter(balance, asset.name)
 
-    def available_currency_in_balance(self : KrakenAPI, balance : Any = None) -> List[str]:
+    def available_currencies_in_balance(self : KrakenAPI, balance : Response = None) -> Response:
         """
         Wrapper returning the list of currencies in the wallet.
 
@@ -161,37 +181,59 @@ class KrakenAPI:
 
         :returns: A list of possible currency.
         """
-        balance = self._get_balance().json() if balance is None else balance.json()
+        resp = Response("")
+        balance = self._get_balance() if balance is None else balance
 
         # check for errors
-        if balance["error"] != []:
-            print("Some error occurred:")
-            print(balance["error"])
-            return None
+        if balance.error != None:
+            return balance
 
-        return list(balance["result"].keys())
+        resp.result = list(balance.result.keys())
+        return resp
 
     ###########################################################################
     ############################### ASSETS ####################################
     ###########################################################################
 
-    def _get_tradable_pairs(self : KrakenAPI) -> Any:
+    def _get_tradable_pairs(self : KrakenAPI) -> Response:
         """
         Returns a dictionary of all tradable pairs of assets.
 
         :returns: A dictionary of all tradable paris of assets.
         """
-        return requests.get('https://api.kraken.com/0/public/AssetPairs')
+        resp = Response("")
+        json = requests.get('https://api.kraken.com/0/public/AssetPairs')
 
-    def _get_assets(self: KrakenAPI) -> Any:
+        # check for errors
+        if json["error"] != []:
+            print("Some error occurred:")
+            print(json["error"])
+            resp.error = Error(json["error"])
+            return resp
+
+        resp.result = json["result"]
+        return resp
+
+    def _get_assets(self: KrakenAPI) -> Response:
         """
         Returns a dictionary of all possible assets.
 
         :returns: A dictionary of all possible assets.
         """
-        return requests.get('https://api.kraken.com/0/public/Assets')
+        resp = Response("")
+        json = requests.get('https://api.kraken.com/0/public/Assets')
 
-    def get_all_tradable_pairs(self : KrakenAPI, pairs : Any = None) -> List[str]:
+        # check for errors
+        if json["error"] != []:
+            print("Some error occurred:")
+            print(json["error"])
+            resp.error = Error(json["error"])
+            return resp
+
+        resp.result = json["result"]
+        return resp
+
+    def get_all_tradable_pairs(self : KrakenAPI, pairs : Any = None) -> Response:
         """
         Returns a list of tradable pairs.
 
@@ -200,17 +242,21 @@ class KrakenAPI:
 
         :returns: A list of tradable assets pairs.
         """
+        resp = Response("")
+
         pairs = self._get_tradable_pairs().json() if pairs is None else pairs.json()
 
         # check for errors
         if pairs["error"] != []:
             print("Some error occurred:")
             print(pairs["error"])
-            return None
+            resp.error = Error(pairs["error"])
+            return resp
 
-        return list(pairs["result"].keys())
+        resp.result = list(pairs["result"].keys())
+        return resp
 
-    def get_tradable_pair(self : KrakenAPI, pair : str, pairs : Any = None) -> Dict[str, Any]:
+    def get_tradable_pair(self : KrakenAPI, pair : Pair, pairs : Any = None) -> Response:
         """
         Returns info about a specific pair of tradable assets.
 
@@ -222,9 +268,9 @@ class KrakenAPI:
         the pair does not exist, returns None.
         """
         pairs = self._get_tradable_pairs().json() if pairs is None else pairs.json()
-        return self.generic_getter(pairs, pair, try_altname=True)
+        return self.generic_getter(pairs, pair.name)
 
-    def get_all_assets(self : KrakenAPI, assets : Any = None) -> List[str]:
+    def get_all_assets(self : KrakenAPI, assets : Any = None) -> Response:
         """
         Returns a list of all possible assets.
 
@@ -233,17 +279,20 @@ class KrakenAPI:
 
         :returns: A list of all possible assets.
         """
+        resp = Response("")
         assets = self._get_assets().json() if assets is None else assets.json()
 
         # check for errors
         if assets["error"] != []:
             print("Some error occurred:")
             print(assets["error"])
-            return None
+            resp.error = Error(assets["error"])
+            return resp
 
-        return list(assets["result"].keys())
+        resp.result = list(assets["result"].keys())
+        return resp
 
-    def get_asset(self : KrakenAPI, asset : str, assets : Any = None) -> Dict[str, Any]:
+    def get_asset(self : KrakenAPI, asset : Asset, assets : Any = None) -> Response:
         """
         Returns info about a specific asset.
 
@@ -255,13 +304,13 @@ class KrakenAPI:
         the asset does not exist, returns None.
         """
         assets = self._get_assets().json() if assets is None else assets.json()
-        return self.generic_getter(assets, asset, try_altname=True)
+        return self.generic_getter(assets, asset.name)
 
     ###########################################################################
     ############################### INFORMATION ###############################
     ###########################################################################
 
-    def _get_ticker(self : KrakenAPI, pair : str) -> Dict[str, Any]:
+    def _get_ticker(self : KrakenAPI, pair : Pair) -> Response:
         """
         Returns all the raw ticker info.
 
@@ -271,9 +320,20 @@ class KrakenAPI:
         :returns: A dictionary of ticker information about the requested
         tradable pair, if it does not exist returns None.
         """
-        return requests.get(f'https://api.kraken.com/0/public/Ticker?pair={pair}')
+        resp = Response(pair.name)
+        json = requests.get(f'https://api.kraken.com/0/public/Ticker?pair={pair.name}')
 
-    def get_current_price(self : KrakenAPI, pair : str, ticker : Dict[str, Any] = None) -> int:
+        # check for errors
+        if json["error"] != []:
+            print("Some error occurred:")
+            print(json["error"])
+            resp.error = Error(json["error"])
+            return resp
+
+        resp.result = resp["result"]
+        return resp
+
+    def get_current_price(self : KrakenAPI, pair : Pair, ticker : Dict[str, Any] = None) -> Response:
         """
         Returns the current conversion rate of a given tradable pair of assets.
 
@@ -281,8 +341,9 @@ class KrakenAPI:
 
         :returns: The current price of the pair.
         """
+        resp = Response(pair.name)
         ticker = self._get_ticker(pair).json() if ticker is None else ticker.json()
-        name, data = self.generic_getter(ticker, pair)
+        _, data = self.generic_getter(ticker, pair.name)
         return {"buy": float(data["c"][0]), "sell": 1 / float(data["c"][0])}
 
 ###############################################################################
