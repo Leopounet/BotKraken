@@ -3,7 +3,7 @@ import os, time
 
 from KrakenAPI import KrakenAPI
 
-from Asset import AssetHandler
+from Asset import AssetHandler, AssetPair
 from Error import Error
 
 ###############################################################################
@@ -32,21 +32,37 @@ if __name__ == "__main__":
     kapi = KrakenAPI(api_url, api_key, api_sec)
 
     ah = AssetHandler()
+
     ah.update_assets(kapi)
+    ah.update_tradable_assets(kapi)
+    ah.update_usd_tradable_prices(kapi)
 
-    x = time.time()
-    calls = 0
+    print(ah.get_best_usd_pair())
 
-    for asset in ah.assets:
-        print(calls)
-        calls += 1
-        result = kapi.public_kraken_request("https://api.kraken.com/0/public/Ticker?pair=XBTUSD")
-        if isinstance(result, Error):
-            print(result.error.value)
-            exit(0)
-        print(result)
+    # for pair in ah.usd_pairs:
+    #     res = kapi.public_kraken_request(f"https://api.kraken.com/0/public/OHLC?pair={ah.pairs[pair].name}")
 
-    print(time.time() - x)
+    #     if isinstance(res, Error):
+    #         print(res.msg)
+    #         break
+        
+    #     print(pair, ":", res[pair][-1])
+
+    # print(ah.pairs["LUNAUSD"])
+
+    # x = time.time()
+    # calls = 0
+
+    # for asset in ah.assets:
+    #     print(calls)
+    #     calls += 1
+    #     result = kapi.public_kraken_request("https://api.kraken.com/0/public/Ticker?pair=XBTUSD")
+    #     if isinstance(result, Error):
+    #         print(result.error.value)
+    #         exit(0)
+    #     print(result)
+
+    # print(time.time() - x)
     
 
     # for i in range(0, 20):

@@ -109,3 +109,27 @@ class KrakenAPI:
         :returns: A valid nonce.
         """
         return str(int(1000 * time.time()))
+
+    ###########################################################################
+    ########################## GETTERS ########################################
+    ###########################################################################
+
+    def get_assets(self : KrakenAPI, *, asset = None) -> Dict[str, Any] | Error:
+        """
+        Returns the list of existing assets, with some info about them.
+
+        :returns: A Dictionary of different values or an Error if any occurred.
+        """
+        if asset != None:
+            return self.public_kraken_request(f'https://api.kraken.com/0/public/Assets?asset={asset}')
+        return self.public_kraken_request('https://api.kraken.com/0/public/Assets')
+
+    def get_tradable_assets(self : KrakenAPI, *, pair = None) -> Dict[str, Any] | Error:
+        """
+        Returns the list of existing tradable pairs of assets, with some info about them.
+
+        :returns: A Dictionary of different values or an Error if any occurred.
+        """
+        if pair != None:
+            return self.public_kraken_request(f"https://api.kraken.com/0/public/AssetPairs?pair={pair}")
+        return self.public_kraken_request("https://api.kraken.com/0/public/AssetPairs")
