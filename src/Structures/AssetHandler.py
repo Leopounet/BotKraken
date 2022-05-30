@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from typing import Dict, Callable
+from typing import Dict
 
 from Structures.Asset import Asset
-from Structures.AssetPair import AssetPair
+import Structures.AssetPair as AP
 from Structures.KrakenAPI import KrakenAPI
 from Structures.Error import Error
+import Structures.Types as Types
 
 class AssetHandler:
 
@@ -21,8 +22,8 @@ class AssetHandler:
         self.assets : Dict[str, Asset] = {}
 
         # generic information about the market
-        self.pairs : Dict[str, AssetPair] = {}
-        self.usd_pairs : Dict[str, AssetPair] = {}
+        self.pairs : Dict[str, AP.AssetPair] = {}
+        self.usd_pairs : Dict[str, AP.AssetPair] = {}
 
     def update_assets(self : AssetHandler, kapi : KrakenAPI, *, asset : str = None) -> None:
         """
@@ -53,12 +54,12 @@ class AssetHandler:
             return None
 
         for pair in result:
-            self.pairs[pair] = AssetPair.build_asset_pair(pair, result[pair])
+            self.pairs[pair] = AP.AssetPair.build_asset_pair(pair, self, result[pair])
 
-            if (self.pairs[pair].base == "ZUSD" or
-                self.pairs[pair].quote == "ZUSD" or
-                self.pairs[pair].quote == "USD" or
-                self.pairs[pair].base == "USD"):
+            if (self.pairs[pair].base.name == "ZUSD" or
+                self.pairs[pair].quote.name == "ZUSD" or
+                self.pairs[pair].quote.name == "USD" or
+                self.pairs[pair].base.name == "USD"):
 
                 self.usd_pairs[pair] = self.pairs[pair]
 
@@ -79,7 +80,7 @@ class AssetHandler:
             self.pairs[pair].update_data(self.pairs[pair].quote != "ZUSD" and self.pairs[pair].quote != "USD")
         else:
             for p in self.usd_pairs:
-                print(p)
+                # print(p)
                 result = kapi.public_kraken_request(f"https://api.kraken.com/0/public/OHLC?pair={p}&interval=5")
 
                 if isinstance(result, Error):
@@ -91,9 +92,8 @@ class AssetHandler:
 
                 total -= 1
                 if total == 0: break
-        print("")
 
-    def get_best_usd_pair(self : AssetHandler, strategy : Callable[[AssetPair], float]) -> AssetPair:
+    def get_best_usd_pair(self : AssetHandler, bs : Types.BuyStrategy) -> AP.AssetPair:
         """
         Returns the best USD pair of tradable assets.
 
@@ -104,14 +104,14 @@ class AssetHandler:
         
         :returns: The best asset to buy right now.
         """
-        best_pair : AssetPair = None
+        best_pair : AP.AssetPair = None
         max_val = None
         best_pair = None
 
         for pair in self.usd_pairs:
             if not self.usd_pairs[pair].is_init: continue
             p = self.usd_pairs[pair]
-            res = strategy(p)
+            res = bs(p)
             
             if max_val == None or max_val < res:
                 max_val = res if max_val == None else max(res, max_val)

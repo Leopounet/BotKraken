@@ -4,6 +4,7 @@ from typing import Dict, List, Any
 
 from Structures.Asset import Asset
 from Structures.AssetPairData import AssetPairData
+import Structures.AssetHandler as AH
 
 class AssetPair:
 
@@ -36,7 +37,7 @@ class AssetPair:
         return maximum
 
     @staticmethod
-    def build_asset_pair(name : str, data : Dict[str, Any]) -> AssetPair:
+    def build_asset_pair(name : str, ah : AH.AssetHandler, data : Dict[str, Any]) -> AssetPair:
         """
         This methods builds a new pair of assets and returns it.
 
@@ -51,8 +52,8 @@ class AssetPair:
         ap.name = name
         ap.altname = data["altname"]
         ap.wsname = data["wsname"]
-        ap.base = data["base"]
-        ap.quote = data["quote"]
+        ap.base = ah.assets[data["base"]]
+        ap.quote = ah.assets[data["quote"]]
         ap.fee = AssetPair.__compute_fee(data["fees"])
         ap.order_min = data["ordermin"]
 
@@ -159,6 +160,25 @@ class AssetPair:
 
         self.data = data
         self.is_init = True
+
+    def copy(self : AssetPair) -> AssetPair:
+        """
+        Creates and returns a copy of this AssetPair object.
+        """
+        ap = AssetPair()
+        ap.name = self.name
+        ap.altname = self.altname
+        ap.wsname = self.wsname
+        ap.base = self.base.copy()
+        ap.quote = self.quote.copy()
+        ap.fee = self.fee
+        ap.order_min = self.order_min
+        ap.history = self.history.copy()
+
+        ap.data = self.data.copy()
+        ap.is_init = self.is_init
+        return ap
+
 
     def __str__(self : AssetPair) -> str:
         s = ""

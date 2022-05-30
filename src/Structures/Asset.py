@@ -39,6 +39,17 @@ class Asset:
 
         return asset
 
+    def copy(self : Asset) -> Asset:
+        """
+        Creates and returns a copy of this asset.
+        """
+        a = Asset()
+        a.name = self.name
+        a.altname = self.altname
+        a.decimals = self.decimals
+        a.display_decimals = self.display_decimals
+        return a
+
     def __str__(self : Asset) -> str:
         s = f"Name = {self.name}\n"
         s += f"Altname = {self.altname}\n"

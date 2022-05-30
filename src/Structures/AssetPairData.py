@@ -39,6 +39,40 @@ class AssetPairData:
         self.average_local_min : float = 0
         self.nb_local_min : int = 0
 
+    def copy(self : AssetPairData) -> AssetPairData:
+        """
+        Creates and returns a copy of this object.
+        """
+        apd = AssetPairData()
+        apd.current = self.current
+        apd.maximum = self.maximum
+        apd.minimum = self.minimum
+        apd.variance = self.variance
+        apd.mean = self.mean
+
+        apd.longest_ascension = self.longest_ascension
+        apd.shortest_ascension = self.shortest_ascension
+        apd.average_ascension = self.average_ascension
+        apd.is_ascending = self.is_ascending
+        apd.current_ascension_duration = self.current_ascension_duration
+        apd.trending_upwards = self.trending_upwards
+
+        apd.longest_fall = self.longest_fall
+        apd.shortest_fall = self.shortest_fall
+        apd.average_fall = self.average_fall
+        apd.is_falling = self.is_falling
+        apd.current_fall_duration = self.current_fall_duration
+        apd.trending_downwards = self.trending_downwards
+
+        apd.local_maximums = self.local_maximums.copy()
+        apd.average_local_max = self.average_local_max
+        apd.nb_local_max = self.nb_local_max
+
+        apd.local_minimums = self.local_minimums.copy()
+        apd.average_local_min = self.average_local_min
+        apd.nb_local_min = self.nb_local_min
+        return apd
+
     def __str__(self : AssetPairData) -> str:
         """
         """
