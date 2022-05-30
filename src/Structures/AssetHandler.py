@@ -26,6 +26,8 @@ class AssetHandler:
         self.pairs : Dict[str, AP.AssetPair] = {}
         self.usd_pairs : Dict[str, AP.AssetPair] = {}
 
+        self.log_file : str = "logs.txt"
+
     def update_assets(self : AssetHandler, kapi : KrakenAPI, *, asset : str = None) -> None:
         """
         This methods updates the list of existing assets.
@@ -36,6 +38,8 @@ class AssetHandler:
 
         if isinstance(result, Error):
             print("An error occurred!")
+            with open(self.log_file, "a") as file:
+                file.write(result.error.value + " : " + result.msg + "\n")
             if result.error == ErrorType.RATE_LIMIT:
                 time.sleep(200)
             return None
@@ -54,6 +58,8 @@ class AssetHandler:
 
         if isinstance(result, Error):
             print("An error occurred!")
+            with open(self.log_file, "a") as file:
+                file.write(result.error.value + " : " + result.msg + "\n")
             if result.error == ErrorType.RATE_LIMIT:
                 time.sleep(200)
             return None
@@ -79,6 +85,8 @@ class AssetHandler:
 
             if isinstance(result, Error):
                 print("An error occurred!")
+                with open(self.log_file, "a") as file:
+                    file.write(result.error.value + " : " + result.msg + "\n")
                 if result.error == ErrorType.RATE_LIMIT:
                     time.sleep(200)
                 return None
@@ -92,6 +100,8 @@ class AssetHandler:
 
                 if isinstance(result, Error):
                     print("An error occurred!")
+                    with open(self.log_file, "a") as file:
+                        file.write(result.error.value + " : " + result.msg + "\n")
                     if result.error == ErrorType.RATE_LIMIT:
                         time.sleep(200)
                     return None
