@@ -51,7 +51,6 @@ class PlayerHandler:
 
         for bm in bsm:
             for sm in self.ssm:
-                print(bm, sm)
                 bs_package_name = PlayerHandler.bsd + "."
                 bs_module_name = bm.split("/")[-1].split(".")[0]
                 bs : BuyStrategy = importlib.import_module(bs_package_name + bs_module_name).strategy
@@ -65,7 +64,6 @@ class PlayerHandler:
         if not was_empty:
             for bm in self.bsm:
                 for sm in ssm:
-                    print(bm, sm)
                     bs_package_name = PlayerHandler.bsd + "."
                     bs_module_name = bm.split("/")[-1].split(".")[0]
                     bs : BuyStrategy = importlib.import_module(bs_package_name + bs_module_name).strategy
@@ -83,6 +81,7 @@ class PlayerHandler:
         self.ah.update_assets(self.kapi)
         self.ah.update_tradable_assets(self.kapi)
         self.ah.update_usd_tradable_prices(self.kapi, total=10)
+        self.generate_players()
         for player in self.players:
             if player.bought_asset_pair == None:
                 player.buy_asset(self.ah)
