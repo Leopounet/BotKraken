@@ -51,6 +51,7 @@ class PlayerHandler:
 
         for bm in bsm:
             for sm in self.ssm:
+                print(bm, sm)
                 bs_package_name = PlayerHandler.bsd + "."
                 bs_module_name = bm.split("/")[-1].split(".")[0]
                 bs : BuyStrategy = importlib.import_module(bs_package_name + bs_module_name).strategy
