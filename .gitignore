@@ -14,6 +14,7 @@
 **/*.nav
 **/*.snm
 **/_minted-main
+**/__pycache__
 .vscode
 *.pdf
 *.d.byte
