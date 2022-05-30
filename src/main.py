@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     while True:
         ph.play()
-        input("")
+        input("Press enter to continue...")
 
         
 
