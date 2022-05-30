@@ -1,11 +1,12 @@
 from __future__ import annotations
+import time
 
 from typing import Dict
 
 from Structures.Asset import Asset
 import Structures.AssetPair as AP
 from Structures.KrakenAPI import KrakenAPI
-from Structures.Error import Error
+from Structures.Error import Error, ErrorType
 import Structures.Types as Types
 
 class AssetHandler:
@@ -35,6 +36,8 @@ class AssetHandler:
 
         if isinstance(result, Error):
             print("An error occurred!")
+            if result.error == ErrorType.RATE_LIMIT:
+                time.sleep(200)
             return None
 
         for asset in result:
@@ -51,6 +54,8 @@ class AssetHandler:
 
         if isinstance(result, Error):
             print("An error occurred!")
+            if result.error == ErrorType.RATE_LIMIT:
+                time.sleep(200)
             return None
 
         for pair in result:
@@ -74,6 +79,8 @@ class AssetHandler:
 
             if isinstance(result, Error):
                 print("An error occurred!")
+                if result.error == ErrorType.RATE_LIMIT:
+                    time.sleep(200)
                 return None
 
             self.pairs[pair].update_prices(result[pair])
@@ -85,6 +92,8 @@ class AssetHandler:
 
                 if isinstance(result, Error):
                     print("An error occurred!")
+                    if result.error == ErrorType.RATE_LIMIT:
+                        time.sleep(200)
                     return None
 
                 self.pairs[p].update_prices(result[p])
