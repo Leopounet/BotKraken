@@ -59,7 +59,7 @@ class PlayerHandler:
                 ss_module_name = sm.split("/")[-1].split(".")[0]
                 ss : BuyStrategy = importlib.import_module(ss_package_name + ss_module_name).strategy
 
-                self.players.append(Player(bs, ss, bs_module_name[:3] + " " + ss_module_name[:3]))
+                self.players.append(Player(bs, ss, bs_module_name + "---" + ss_module_name))
 
         if not was_empty:
             for bm in self.bsm:
@@ -72,7 +72,7 @@ class PlayerHandler:
                     ss_module_name = sm.split("/")[-1].split(".")[0]
                     ss : BuyStrategy = importlib.import_module(ss_package_name + ss_module_name).strategy
 
-                    self.players.append(Player(bs, ss, bs_module_name[:3] + " " + ss_module_name[:3]))
+                    self.players.append(Player(bs, ss, bs_module_name + "---" + ss_module_name))
     
     def play(self : PlayerHandler) -> None:
         """
