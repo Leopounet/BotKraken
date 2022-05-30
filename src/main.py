@@ -1,10 +1,10 @@
 from __future__ import annotations
-import os, time
+import os, glob, importlib
+from typing import Callable
 
-from KrakenAPI import KrakenAPI
-
-from Asset import AssetHandler, AssetPair
-from Error import Error
+from Structures.KrakenAPI import KrakenAPI
+from Structures.AssetHandler import AssetHandler
+from Structures.AssetPair import AssetPair
 
 ###############################################################################
 ############################## VARIABLES ######################################
@@ -14,6 +14,9 @@ from Error import Error
 api_url = "https://api.kraken.com"
 api_key = os.environ["API_KEY_KRAKEN"]
 api_sec = os.environ["API_SEC_KRAKEN"]
+
+# strategies directory
+buy_strategies_dir = "BuyStrategies"
 
 ###############################################################################
 ############################## CLASSES ########################################
@@ -35,57 +38,18 @@ if __name__ == "__main__":
 
     ah.update_assets(kapi)
     ah.update_tradable_assets(kapi)
-    ah.update_usd_tradable_prices(kapi)
+    ah.update_usd_tradable_prices(kapi, pair="LUNAUSD")
 
-    print(ah.get_best_usd_pair())
+    buy_strategies = set(glob.glob(buy_strategies_dir + "/*.py"))
+    init_files = set(glob.glob(buy_strategies_dir + "/__init__.py"))
+    buy_strategies = buy_strategies.difference(init_files)
 
-    # for pair in ah.usd_pairs:
-    #     res = kapi.public_kraken_request(f"https://api.kraken.com/0/public/OHLC?pair={ah.pairs[pair].name}")
+    for strategy in buy_strategies:
+        package_name = buy_strategies_dir + "."
+        module_name = strategy.split("/")[-1].split(".")[0]
+        strategy : Callable[[AssetPair], float] = importlib.import_module(package_name + module_name).strategy
 
-    #     if isinstance(res, Error):
-    #         print(res.msg)
-    #         break
-        
-    #     print(pair, ":", res[pair][-1])
-
-    # print(ah.pairs["LUNAUSD"])
-
-    # x = time.time()
-    # calls = 0
-
-    # for asset in ah.assets:
-    #     print(calls)
-    #     calls += 1
-    #     result = kapi.public_kraken_request("https://api.kraken.com/0/public/Ticker?pair=XBTUSD")
-    #     if isinstance(result, Error):
-    #         print(result.error.value)
-    #         exit(0)
-    #     print(result)
-
-    # print(time.time() - x)
-    
-
-    # for i in range(0, 20):
-    #     print(kapi._get_tradable_pairs().json())
-
-    # print(kapi._get_balance().json())
-    # print(kapi.get_balance("ZUSD"))
-    # print(kapi.get_balance("LUNA"))
-    # print(kapi.available_currency_in_balance())
-
-    # get a lot of info
-    # pairs = kapi._get_tradable_pairs()
-    # assets = kapi._get_assets()
-    # ticker = kapi._get_ticker("ZEURZUSD")
-
-    # # get infos
-    # pretty_printer(kapi.get_asset("ZEUR", assets), postpend=dashed)
-    # pretty_printer(kapi.get_asset("ZUSD", assets), postpend=dashed)
-    # pretty_printer(kapi.get_asset("USD", assets), postpend=dashed)
-
-    # pretty_printer(kapi.get_tradable_pair("ZEURZUSD", pairs), postpend=dashed)
-    # pretty_printer(kapi.get_tradable_pair("LUNAUSD", pairs), postpend=dashed)
-
-    # print("price of EUR to USD is: " + str(kapi.get_current_price("ZEURZUSD", ticker)))
-
+        print("Asset yielded by " + module_name + " strategy:\n")
+        print(ah.get_best_usd_pair(strategy))
+        print("------------------------------------------------------------------")
 

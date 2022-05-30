@@ -1,15 +1,14 @@
 from __future__ import annotations
 import time
-import os
 import requests
 import urllib.parse
 import hashlib
 import hmac
 import base64
 
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict
 
-from Error import Error
+from Structures.Error import Error
 
 ###############################################################################
 ############################## VARIABLES ######################################
