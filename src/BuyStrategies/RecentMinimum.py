@@ -26,4 +26,5 @@ minimum."
             if latest_max == None or date > latest_max:
                 latest_max = date
 
-        return Strategy.normalize(latest_min - latest_max)
+        res = Strategy.normalize(latest_min - latest_max)
+        return Strategy.get_res(Strategy.name, ap, res)

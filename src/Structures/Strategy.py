@@ -10,10 +10,19 @@ class BuyStrategy:
     cached_data : Dict[str, Dict[str, Any]] = {}
     name : str = ""
     description : str = ""
+    other : Dict[str, List[BuyStrategy]] = {}
 
     @staticmethod
     def normalize(x : float) -> float:
         return ((2 / math.pi) * math.atan(x) + 2) / 2
+
+    @staticmethod
+    def get_res(s_name : str, ap : AssetPair, res : float) -> float:
+        if not s_name in BuyStrategy.other: return res
+        other = BuyStrategy.other[s_name]
+        for f in other:
+            res = (f.strategy(ap) + res) / 2 if res != None else f.strategy(ap)
+        return res
 
     @staticmethod
     def strategy(ap : AssetPair) -> float:

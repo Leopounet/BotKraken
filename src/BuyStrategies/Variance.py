@@ -14,4 +14,5 @@ class Strategy(BuyStrategy):
 
     @staticmethod
     def strategy(ap : AssetPair) -> float:
-        return Strategy.normalize(ap.data.variance)
+        res = Strategy.normalize(ap.data.variance)
+        return Strategy.get_res(Strategy.name, ap, res)

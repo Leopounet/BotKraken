@@ -16,4 +16,5 @@ class Strategy(BuyStrategy):
 
     @staticmethod
     def strategy(ap : AssetPair) -> float:
-        return Strategy.normalize(random.random())
+        res = Strategy.normalize(random.random())
+        return Strategy.get_res(Strategy.name, ap, res)

@@ -1,6 +1,9 @@
 from Structures.AssetPair import AssetPair
 from Structures.Strategy import BuyStrategy
 
+from BuyStrategies.LowerAllLocalMinimums import Strategy as LALM
+from BuyStrategies.Variance import Strategy as V
+
 from typing import Dict, Any
 
 ###############################################################################
@@ -9,11 +12,11 @@ from typing import Dict, Any
 
 class Strategy(BuyStrategy):
 
-    name : str = "Mean"
-    description : str = "Looks for the asset for which the current price is the lowest \
-compared to the mean of all previous prices."
+    name : str = "Variance Lower All Local Minimums"
+    description : str = "Looks for the asset for which the current price is lower \
+than all previous local minimums."
 
     @staticmethod
     def strategy(ap : AssetPair) -> float:
-        res = Strategy.normalize(ap.data.mean - ap.data.current)
-        return Strategy.get_res(Strategy.name, ap, res)
+        Strategy.other[Strategy.name] = [V, LALM]
+        return Strategy.get_res(Strategy.name, ap, None)

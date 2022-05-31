@@ -1,9 +1,9 @@
-type object 'Strategy' has no attribute 'get'
+type object 'BuyStrategy' has no attribute 'mandatory'
 <class 'AttributeError'>
-type object 'Strategy' has no attribute 'get'
-<frame at 0x7f329ac3a9f0, file '/home/leop/Desktop/BotKraken/src/Structures/PlayerHandler.py', line 94, code play>
-106
-91
+type object 'BuyStrategy' has no attribute 'mandatory'
+<frame at 0x7fa7b35d8230, file '/home/leop/Desktop/BotKraken/src/Structures/PlayerHandler.py', line 94, code play>
+92
+90
 
 Assets:
 Name = 1INCH
@@ -1041,22 +1041,22 @@ Data about this tradable pair of assets:
         Maximum:                    1.104972
         Minimum:                    0.98912
         Variance:                   0.104847
-        Mean:                       1.043435
+        Mean:                       1.042777
         Longest ascension:          3
         Shortest ascension:         3
-        Average ascension:          3.0
+        Average ascension:          3.107143
         Is ascending:               True
-        Current ascension duration: 16
+        Current ascension duration: 23
         Trending upwards:           True
         Longest fall:               3
         Shortest fall:              3
-        Average fall:               3.0
+        Average fall:               2.896552
         Is falling:                 True
-        Current fall duration:      5
+        Current fall duration:      12
         Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
+        Average local maximum:      0.958464
+        Number of local maximums:   28
+        Average local minimum:      0.960862
         Number of local minimums:   29
 True
 -------------------------------------------------
@@ -1139,25 +1139,25 @@ Fee: 0.26
 Min order: 0.02
 Data about this tradable pair of assets:
 
-        Current:                    113.78
+        Current:                    113.48
         Maximum:                    0.010664
         Minimum:                    0.008108
         Variance:                   0.239744
-        Mean:                       0.009417
+        Mean:                       0.009399
         Longest ascension:          3
         Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
+        Average ascension:          2.5
+        Is ascending:               True
+        Current ascension duration: 4
         Trending upwards:           True
         Longest fall:               3
         Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
+        Average fall:               3.6
+        Is falling:                 False
+        Current fall duration:      0
         Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
+        Average local maximum:      106.810833
+        Number of local maximums:   24
         Average local minimum:      105.68
         Number of local minimums:   20
 True
@@ -9917,22 +9917,22 @@ Data about this tradable pair of assets:
         Maximum:                    1.104972
         Minimum:                    0.98912
         Variance:                   0.104847
-        Mean:                       1.043435
+        Mean:                       1.042777
         Longest ascension:          3
         Shortest ascension:         3
-        Average ascension:          3.0
+        Average ascension:          3.107143
         Is ascending:               True
-        Current ascension duration: 16
+        Current ascension duration: 23
         Trending upwards:           True
         Longest fall:               3
         Shortest fall:              3
-        Average fall:               3.0
+        Average fall:               2.896552
         Is falling:                 True
-        Current fall duration:      5
+        Current fall duration:      12
         Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
+        Average local maximum:      0.958464
+        Number of local maximums:   28
+        Average local minimum:      0.960862
         Number of local minimums:   29
 True
 -------------------------------------------------
@@ -9951,25 +9951,25 @@ Fee: 0.26
 Min order: 0.02
 Data about this tradable pair of assets:
 
-        Current:                    113.78
+        Current:                    113.48
         Maximum:                    0.010664
         Minimum:                    0.008108
         Variance:                   0.239744
-        Mean:                       0.009417
+        Mean:                       0.009399
         Longest ascension:          3
         Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
+        Average ascension:          2.5
+        Is ascending:               True
+        Current ascension duration: 4
         Trending upwards:           True
         Longest fall:               3
         Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
+        Average fall:               3.6
+        Is falling:                 False
+        Current fall duration:      0
         Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
+        Average local maximum:      106.810833
+        Number of local maximums:   24
         Average local minimum:      105.68
         Number of local minimums:   20
 True
@@ -12710,9 +12710,93 @@ Min order: 5
 None
 False
 -------------------------------------------------
+Mean---Twenty-four hours or ten percent.
+Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+Sells when the profit is 10% or it has been 24h.
+{}
+{}
+None
+Mean---Twenty-four hours.
+Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+Sells when it has been 24h.
+{}
+{}
+None
+Mean---Five Percent
+Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+Sells when the profit is 5%.
+{}
+{}
+None
+Mean---Random
+Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+Random.
+{}
+{}
+None
+Mean---Twenty-four hours or ten percent decreasing.
+Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+Sells when the profit is 10% and the price is decreasing or it has been 24h.
+{}
+{}
+None
+Mean---Never
+Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+Never sells.
+{}
+{}
+None
+Mean---Ten percent decreasing.
+Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+Sells when the profit is 10% and the price is decreasing.
+{}
+{}
+None
+Mean---Ten Percent
+Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+Sells when the profit is 10%.
+{}
+{}
+None
+Mean---Always
+Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+Always sells.
+{}
+{}
+None
+Random---Twenty-four hours or ten percent.
+Random.
+Sells when the profit is 10% or it has been 24h.
+{}
+{}
+None
+Random---Twenty-four hours.
+Random.
+Sells when it has been 24h.
+{}
+{}
+None
+Random---Five Percent
+Random.
+Sells when the profit is 5%.
+{}
+{}
+None
 Random---Random
 Random.
 Random.
+{}
+{}
+None
+Random---Twenty-four hours or ten percent decreasing.
+Random.
+Sells when the profit is 10% and the price is decreasing or it has been 24h.
+{}
+{}
+None
+Random---Never
+Random.
+Never sells.
 {}
 {}
 None
@@ -12721,1851 +12805,237 @@ Random.
 Sells when the profit is 10% and the price is decreasing.
 {}
 {}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Random---Twenty-four hours or ten percent decreasing.
-Random.
-Sells when the profit is 10% and the price is decreasing or it has been 24h.
-{}
-{}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Random---Five Percent
-Random.
-Sells when the profit is 5%.
-{}
-{}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Random---Twenty-four hours.
-Random.
-Sells when it has been 24h.
-{}
-{}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Random---Twenty-four hours or ten percent.
-Random.
-Sells when the profit is 10% or it has been 24h.
-{}
-{}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
+None
 Random---Ten Percent
 Random.
 Sells when the profit is 10%.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
+None
 Random---Always
 Random.
 Always sells.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Random---Never
-Random.
-Never sells.
-{}
-{}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Lower All Local Minimums---Random
+None
+Variance Lower All Local Minimums---Twenty-four hours or ten percent.
 Looks for the asset for which the current price is lower than all previous local minimums.
-Random.
+Sells when the profit is 10% or it has been 24h.
 {}
 {}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Lower All Local Minimums---Ten percent decreasing.
-Looks for the asset for which the current price is lower than all previous local minimums.
-Sells when the profit is 10% and the price is decreasing.
-{}
-{}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Lower All Local Minimums---Twenty-four hours or ten percent decreasing.
-Looks for the asset for which the current price is lower than all previous local minimums.
-Sells when the profit is 10% and the price is decreasing or it has been 24h.
-{}
-{}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Lower All Local Minimums---Five Percent
-Looks for the asset for which the current price is lower than all previous local minimums.
-Sells when the profit is 5%.
-{}
-{}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Lower All Local Minimums---Twenty-four hours.
+None
+Variance Lower All Local Minimums---Twenty-four hours.
 Looks for the asset for which the current price is lower than all previous local minimums.
 Sells when it has been 24h.
 {}
 {}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
+None
+Variance Lower All Local Minimums---Five Percent
+Looks for the asset for which the current price is lower than all previous local minimums.
+Sells when the profit is 5%.
+{}
+{}
+None
+Variance Lower All Local Minimums---Random
+Looks for the asset for which the current price is lower than all previous local minimums.
+Random.
+{}
+{}
+None
+Variance Lower All Local Minimums---Twenty-four hours or ten percent decreasing.
+Looks for the asset for which the current price is lower than all previous local minimums.
+Sells when the profit is 10% and the price is decreasing or it has been 24h.
+{}
+{}
+None
+Variance Lower All Local Minimums---Never
+Looks for the asset for which the current price is lower than all previous local minimums.
+Never sells.
+{}
+{}
+None
+Variance Lower All Local Minimums---Ten percent decreasing.
+Looks for the asset for which the current price is lower than all previous local minimums.
+Sells when the profit is 10% and the price is decreasing.
+{}
+{}
+None
+Variance Lower All Local Minimums---Ten Percent
+Looks for the asset for which the current price is lower than all previous local minimums.
+Sells when the profit is 10%.
+{}
+{}
+None
+Variance Lower All Local Minimums---Always
+Looks for the asset for which the current price is lower than all previous local minimums.
+Always sells.
+{}
+{}
+None
 Lower All Local Minimums---Twenty-four hours or ten percent.
 Looks for the asset for which the current price is lower than all previous local minimums.
 Sells when the profit is 10% or it has been 24h.
 {}
 {}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Lower All Local Minimums---Ten Percent
+None
+Lower All Local Minimums---Twenty-four hours.
 Looks for the asset for which the current price is lower than all previous local minimums.
-Sells when the profit is 10%.
+Sells when it has been 24h.
 {}
 {}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Lower All Local Minimums---Always
+None
+Lower All Local Minimums---Five Percent
 Looks for the asset for which the current price is lower than all previous local minimums.
-Always sells.
+Sells when the profit is 5%.
 {}
 {}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
+None
+Lower All Local Minimums---Random
+Looks for the asset for which the current price is lower than all previous local minimums.
+Random.
+{}
+{}
+None
+Lower All Local Minimums---Twenty-four hours or ten percent decreasing.
+Looks for the asset for which the current price is lower than all previous local minimums.
+Sells when the profit is 10% and the price is decreasing or it has been 24h.
+{}
+{}
+None
 Lower All Local Minimums---Never
 Looks for the asset for which the current price is lower than all previous local minimums.
 Never sells.
 {}
 {}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Variance---Random
-Looks for the asset which has the highest Variance.
-Random.
-{}
-{}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Variance---Ten percent decreasing.
-Looks for the asset which has the highest Variance.
+None
+Lower All Local Minimums---Ten percent decreasing.
+Looks for the asset for which the current price is lower than all previous local minimums.
 Sells when the profit is 10% and the price is decreasing.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Variance---Twenty-four hours or ten percent decreasing.
-Looks for the asset which has the highest Variance.
-Sells when the profit is 10% and the price is decreasing or it has been 24h.
+None
+Lower All Local Minimums---Ten Percent
+Looks for the asset for which the current price is lower than all previous local minimums.
+Sells when the profit is 10%.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Variance---Five Percent
-Looks for the asset which has the highest Variance.
-Sells when the profit is 5%.
+None
+Lower All Local Minimums---Always
+Looks for the asset for which the current price is lower than all previous local minimums.
+Always sells.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Variance---Twenty-four hours.
-Looks for the asset which has the highest Variance.
-Sells when it has been 24h.
-{}
-{}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
+None
 Variance---Twenty-four hours or ten percent.
 Looks for the asset which has the highest Variance.
 Sells when the profit is 10% or it has been 24h.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Variance---Ten Percent
+None
+Variance---Twenty-four hours.
 Looks for the asset which has the highest Variance.
-Sells when the profit is 10%.
+Sells when it has been 24h.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Variance---Always
+None
+Variance---Five Percent
 Looks for the asset which has the highest Variance.
-Always sells.
+Sells when the profit is 5%.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
+None
+Variance---Random
+Looks for the asset which has the highest Variance.
+Random.
+{}
+{}
+None
+Variance---Twenty-four hours or ten percent decreasing.
+Looks for the asset which has the highest Variance.
+Sells when the profit is 10% and the price is decreasing or it has been 24h.
+{}
+{}
+None
 Variance---Never
 Looks for the asset which has the highest Variance.
 Never sells.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Recent Minimum---Random
-Looks for the asset which is closer to its previous local minimum.
-Random.
-{}
-{}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Recent Minimum---Ten percent decreasing.
-Looks for the asset which is closer to its previous local minimum.
+None
+Variance---Ten percent decreasing.
+Looks for the asset which has the highest Variance.
 Sells when the profit is 10% and the price is decreasing.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Recent Minimum---Twenty-four hours or ten percent decreasing.
-Looks for the asset which is closer to its previous local minimum.
-Sells when the profit is 10% and the price is decreasing or it has been 24h.
+None
+Variance---Ten Percent
+Looks for the asset which has the highest Variance.
+Sells when the profit is 10%.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Recent Minimum---Five Percent
-Looks for the asset which is closer to its previous local minimum.
-Sells when the profit is 5%.
+None
+Variance---Always
+Looks for the asset which has the highest Variance.
+Always sells.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Recent Minimum---Twenty-four hours.
-Looks for the asset which is closer to its previous local minimum.
-Sells when it has been 24h.
-{}
-{}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
+None
 Recent Minimum---Twenty-four hours or ten percent.
 Looks for the asset which is closer to its previous local minimum.
 Sells when the profit is 10% or it has been 24h.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Recent Minimum---Ten Percent
+None
+Recent Minimum---Twenty-four hours.
 Looks for the asset which is closer to its previous local minimum.
-Sells when the profit is 10%.
+Sells when it has been 24h.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Recent Minimum---Always
+None
+Recent Minimum---Five Percent
 Looks for the asset which is closer to its previous local minimum.
-Always sells.
+Sells when the profit is 5%.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
+None
+Recent Minimum---Random
+Looks for the asset which is closer to its previous local minimum.
+Random.
+{}
+{}
+None
+Recent Minimum---Twenty-four hours or ten percent decreasing.
+Looks for the asset which is closer to its previous local minimum.
+Sells when the profit is 10% and the price is decreasing or it has been 24h.
+{}
+{}
+None
 Recent Minimum---Never
 Looks for the asset which is closer to its previous local minimum.
 Never sells.
 {}
 {}
-Name: AAVEUSD
-Altname: AAVEUSD
-Wsname: AAVE/USD
-Base: Name = AAVE
-Altname = AAVE
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 0.02
-Data about this tradable pair of assets:
-
-        Current:                    113.78
-        Maximum:                    0.010664
-        Minimum:                    0.008108
-        Variance:                   0.239744
-        Mean:                       0.009417
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          2.307692
-        Is ascending:               False
-        Current ascension duration: 0
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.9
-        Is falling:                 True
-        Current fall duration:      3
-        Trending downwards:         False
-        Average local maximum:      105.823077
-        Number of local maximums:   26
-        Average local minimum:      105.68
-        Number of local minimums:   20
-True
-Mean---Random
-Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
-Random.
-{}
-{}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Mean---Ten percent decreasing.
-Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+None
+Recent Minimum---Ten percent decreasing.
+Looks for the asset which is closer to its previous local minimum.
 Sells when the profit is 10% and the price is decreasing.
 {}
 {}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Mean---Twenty-four hours or ten percent decreasing.
-Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
-Sells when the profit is 10% and the price is decreasing or it has been 24h.
-{}
-{}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Mean---Five Percent
-Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
-Sells when the profit is 5%.
-{}
-{}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Mean---Twenty-four hours.
-Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
-Sells when it has been 24h.
-{}
-{}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Mean---Twenty-four hours or ten percent.
-Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
-Sells when the profit is 10% or it has been 24h.
-{}
-{}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Mean---Ten Percent
-Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+None
+Recent Minimum---Ten Percent
+Looks for the asset which is closer to its previous local minimum.
 Sells when the profit is 10%.
 {}
 {}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Mean---Always
-Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
+None
+Recent Minimum---Always
+Looks for the asset which is closer to its previous local minimum.
 Always sells.
 {}
 {}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-Mean---Never
-Looks for the asset for which the current price is the lowest compared to the mean of all previous prices.
-Never sells.
-{}
-{}
-Name: 1INCHUSD
-Altname: 1INCHUSD
-Wsname: 1INCH/USD
-Base: Name = 1INCH
-Altname = 1INCH
-decimals = 10
-displayed_decimals = 5
-Quote: Name = ZUSD
-Altname = USD
-decimals = 4
-displayed_decimals = 2
-Fee: 0.26
-Min order: 5
-Data about this tradable pair of assets:
-
-        Current:                    0.967
-        Maximum:                    1.104972
-        Minimum:                    0.98912
-        Variance:                   0.104847
-        Mean:                       1.043435
-        Longest ascension:          3
-        Shortest ascension:         3
-        Average ascension:          3.0
-        Is ascending:               True
-        Current ascension duration: 16
-        Trending upwards:           True
-        Longest fall:               3
-        Shortest fall:              3
-        Average fall:               3.0
-        Is falling:                 True
-        Current fall duration:      5
-        Trending downwards:         False
-        Average local maximum:      0.956724
-        Number of local maximums:   29
-        Average local minimum:      0.960966
-        Number of local minimums:   29
-True
-{'BuyStrategies/Random.py', 'BuyStrategies/LowerAllLocalMinimums.py', 'BuyStrategies/Variance.py', 'BuyStrategies/RecentMinimum.py', 'BuyStrategies/Mean.py'}
-{'SellStrategies/Random.py', 'SellStrategies/TPDescending.py', 'SellStrategies/TFH_or_TPD.py', 'SellStrategies/FivePercent.py', 'SellStrategies/TwentyFourHours.py', 'SellStrategies/TFH_or_TP.py', 'SellStrategies/TenPercent.py', 'SellStrategies/Always.py', 'SellStrategies/Never.py'}
+None
+{'BuyStrategies/Mean.py', 'BuyStrategies/Random.py', 'BuyStrategies/VLALM.py', 'BuyStrategies/LowerAllLocalMinimums.py', 'BuyStrategies/Variance.py', 'BuyStrategies/RecentMinimum.py'}
+{'SellStrategies/TFH_or_TP.py', 'SellStrategies/TwentyFourHours.py', 'SellStrategies/FivePercent.py', 'SellStrategies/Random.py', 'SellStrategies/TFH_or_TPD.py', 'SellStrategies/Never.py', 'SellStrategies/TPDescending.py', 'SellStrategies/TenPercent.py', 'SellStrategies/Always.py'}
 
 
 --------------------------------------------------------------

@@ -17,6 +17,7 @@ than all previous local minimums."
     def strategy(ap : AssetPair) -> float:
         res = 0
         for lm in ap.data.local_minimums:
-            if ap.data.current <= ap.data.local_minimums[lm]: res += 1
+            if ap.data.current < ap.data.local_minimums[lm]: res += 1
             else: res -= 1
-        return Strategy.normalize(res)
+        res = Strategy.normalize(res)
+        return Strategy.get_res(Strategy.name, ap, res)
