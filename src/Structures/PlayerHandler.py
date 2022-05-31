@@ -78,13 +78,17 @@ class PlayerHandler:
         """
         A round of play.
         """
-        self.ah.update_assets(self.kapi)
-        self.ah.update_tradable_assets(self.kapi)
-        self.ah.update_usd_tradable_prices(self.kapi)
-        self.generate_players()
-        for player in self.players:
-            if player.bought_asset_pair == None:
-                player.buy_asset(self.ah)
-            elif player.should_sell(self.ah):
-                player.sell_asset(self.ah)
+        try:
+            self.ah.update_assets(self.kapi)
+            self.ah.update_tradable_assets(self.kapi)
+            self.ah.update_usd_tradable_prices(self.kapi)
+            self.generate_players()
+            for player in self.players:
+                if player.bought_asset_pair == None:
+                    player.buy_asset(self.ah)
+                elif player.should_sell(self.ah):
+                    player.sell_asset(self.ah)
+        except Exception as e:
+            with open("logs.txt", "a") as file:
+                file.write(str(e) + "\n")
 
