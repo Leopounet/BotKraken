@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     while True:
         ph.play()
-        time.sleep(300)
+        time.sleep(120)
 
         
 

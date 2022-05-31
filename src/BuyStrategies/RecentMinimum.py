@@ -1,4 +1,5 @@
 from Structures.AssetPair import AssetPair
+from Structures.Strategy import BuyStrategy
 
 from typing import Dict, Any
 
@@ -6,9 +7,8 @@ from typing import Dict, Any
 ############################ STRATEGY #########################################
 ###############################################################################
 
-class Strategy:
+class Strategy(BuyStrategy):
 
-    cached_data : Dict[str, Dict[str, Any]] = {}
     name : str = "Recent Minimum"
     description : str = "Looks for the asset which is closer to its previous local \
 minimum."
@@ -26,4 +26,4 @@ minimum."
             if latest_max == None or date > latest_max:
                 latest_max = date
 
-        return latest_min - latest_max
+        return Strategy.normalize(latest_min - latest_max)

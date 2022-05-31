@@ -1,6 +1,7 @@
 import random
 
 from Structures.AssetPair import AssetPair
+from Structures.Strategy import BuyStrategy
 
 from typing import Dict, Any
 
@@ -8,12 +9,11 @@ from typing import Dict, Any
 ############################ STRATEGY #########################################
 ###############################################################################
 
-class Strategy:
+class Strategy(BuyStrategy):
 
-    cached_data : Dict[str, Dict[str, Any]] = {}
     name : str = "Random"
     description : str = "Random."
 
     @staticmethod
     def strategy(ap : AssetPair) -> float:
-        return random.random()
+        return Strategy.normalize(random.random())

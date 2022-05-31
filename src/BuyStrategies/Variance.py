@@ -1,4 +1,5 @@
 from Structures.AssetPair import AssetPair
+from Structures.Strategy import BuyStrategy
 
 from typing import Dict, Any
 
@@ -6,12 +7,11 @@ from typing import Dict, Any
 ############################ STRATEGY #########################################
 ###############################################################################
 
-class Strategy:
+class Strategy(BuyStrategy):
 
-    cached_data : Dict[str, Dict[str, Any]] = {}
     name : str = "Variance"
     description : str = "Looks for the asset which has the highest Variance."
 
     @staticmethod
     def strategy(ap : AssetPair) -> float:
-        return ap.data.variance
+        return Strategy.normalize(ap.data.variance)
