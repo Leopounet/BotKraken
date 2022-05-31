@@ -15,7 +15,7 @@
 **/*.snm
 **/_minted-main
 **/__pycache__
-**/Results/*.res
+**/*.res
 __pycache__
 .vscode
 *.pdf

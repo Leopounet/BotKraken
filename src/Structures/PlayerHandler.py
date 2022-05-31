@@ -1,11 +1,12 @@
 from __future__ import annotations
-from typing import List, Set
-import glob, importlib
+import time
+from typing import List, Set, Type
+import glob, importlib, sys
 
 from Structures.AssetHandler import AssetHandler
 from Structures.Player import Player
 from Structures.KrakenAPI import KrakenAPI
-from Structures.Types import BuyStrategy, SellStrategy
+import Structures.Strategy as Strategy
 
 class PlayerHandler:
 
@@ -51,28 +52,28 @@ class PlayerHandler:
 
         for bm in bsm:
             for sm in self.ssm:
-                bs_package_name = PlayerHandler.bsd + "."
-                bs_module_name = bm.split("/")[-1].split(".")[0]
-                bs : BuyStrategy = importlib.import_module(bs_package_name + bs_module_name).strategy
+                bspn = PlayerHandler.bsd + "."
+                bsmn = bm.split("/")[-1].split(".")[0]
+                bs : Type[Strategy.BuyStrategy] = importlib.import_module(bspn + bsmn).Strategy
 
-                ss_package_name = PlayerHandler.ssd + "."
-                ss_module_name = sm.split("/")[-1].split(".")[0]
-                ss : BuyStrategy = importlib.import_module(ss_package_name + ss_module_name).strategy
+                sspn = PlayerHandler.ssd + "."
+                ssmn = sm.split("/")[-1].split(".")[0]
+                ss : Type[Strategy.SellStrategy] = importlib.import_module(sspn + ssmn).Strategy
 
-                self.players.append(Player(bs, ss, bs_module_name + "---" + ss_module_name))
+                self.players.append(Player(bs, ss))
 
         if not was_empty:
             for bm in self.bsm:
                 for sm in ssm:
-                    bs_package_name = PlayerHandler.bsd + "."
-                    bs_module_name = bm.split("/")[-1].split(".")[0]
-                    bs : BuyStrategy = importlib.import_module(bs_package_name + bs_module_name).strategy
+                    bspn = PlayerHandler.bsd + "."
+                    bsmn = bm.split("/")[-1].split(".")[0]
+                    bs : Type[Strategy.BuyStrategy] = importlib.import_module(bspn + bsmn).Strategy
 
-                    ss_package_name = PlayerHandler.ssd + "."
-                    ss_module_name = sm.split("/")[-1].split(".")[0]
-                    ss : BuyStrategy = importlib.import_module(ss_package_name + ss_module_name).strategy
+                    sspn = PlayerHandler.ssd + "."
+                    ssmn = sm.split("/")[-1].split(".")[0]
+                    ss : Type[Strategy.SellStrategy] = importlib.import_module(sspn + ssmn).Strategy
 
-                    self.players.append(Player(bs, ss, bs_module_name + "---" + ss_module_name))
+                    self.players.append(Player(bs, ss))
     
     def play(self : PlayerHandler) -> None:
         """
@@ -89,6 +90,32 @@ class PlayerHandler:
                 elif player.should_sell(self.ah):
                     player.sell_asset(self.ah)
         except Exception as e:
-            with open("logs.txt", "a") as file:
-                file.write(str(e) + "\n")
+            self.handle_exception(e, sys.exc_info())
+
+    def __str__(self : PlayerHandler) -> str:
+        s = ""
+        s += str(self.ah) + "\n"
+        
+        for player in self.players:
+            s += str(player) + "\n"
+
+        s += str(self.bsm) + "\n"
+        s += str(self.ssm)
+        return s
+
+    def handle_exception(self : PlayerHandler, e : Exception, details) -> None:
+        """
+        Handles an exception, if one happens.
+        """
+        with open("logs" + str(int(time.time())) + ".txt", "a") as file:
+            file.write(str(e) + "\n")
+            type, value, traceback = details
+            file.write(str(type) + "\n")
+            file.write(str(value) + "\n")
+            file.write(str(traceback.tb_frame) + "\n")
+            file.write(str(traceback.tb_lasti) + "\n")
+            file.write(str(traceback.tb_lineno) + "\n\n")
+
+            file.write(str(self))
+            file.write("\n\n\n--------------------------------------------------------------")
 

@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+from typing import Type
+
 from datetime import datetime
 
-import Structures.Types as Types
 from Structures.AssetPair import AssetPair
 import Structures.AssetHandler as AH
 from Structures.Color import Color, random_color
+import Structures.Strategy as Strategy
 
 class Player:
 
@@ -14,22 +16,29 @@ class Player:
     to sell and buy.
     """
 
-    result_dir = "Results/"
+    result_dir = "Results/Classic/"
+    detailed_result_dir = "Results/Detailed/"
+    brief_result_dir = "Results/Brief/"
 
-    def __init__(self : Player, bs : Types.BuyStrategy, ss : Types.SellStrategy, name : str) -> Player:
+    def __init__(self : Player, bs : Type[Strategy.BuyStrategy], ss : Type[Strategy.SellStrategy]) -> Player:
         """
         Creates a new player.
 
         :param bs: The BuyStrategy to use.
         :param ss: The SellStrategy to use.
         """
-        self.bs : Types.BuyStrategy = bs
-        self.ss : Types.SellStrategy = ss
-        self.name : str = name
+        self.bs : Type[Strategy.BuyStrategy] = bs
+        self.ss : Type[Strategy.SellStrategy] = ss
+        self.name : str = bs.name + "---" + ss.name
         self.bought_asset_pair : AssetPair | None = None
         self.color = random_color()
         self.log_file : str = Player.result_dir + self.name + ".res"
-        self.detailed_log_file : str = Player.result_dir + self.name + "_detailed.res"
+        self.detailed_log_file : str = Player.detailed_result_dir + self.name + ".res"
+        self.brief_log_file : str = Player.brief_result_dir + self.name + ".res"
+
+        self.wins : int = 0
+        self.loss : int = 0
+        self.total_points : float = 0
 
     def buy_asset(self : Player, ah : AH.AssetHandler) -> None:
         """
@@ -61,7 +70,7 @@ class Player:
 
         :param ah: The AssetHandler to use as a reference.
         """
-        return self.ss(self, ah.pairs[self.bought_asset_pair.name])
+        return self.ss.strategy(self, ah.pairs[self.bought_asset_pair.name])
 
     def sell_asset(self : Player, ah : AH.AssetHandler) -> None:
         """
@@ -76,10 +85,17 @@ class Player:
         profit = ah.pairs[self.bought_asset_pair.name].data.current / self.bought_asset_pair.data.current
         profit = - (1 - profit)
 
+        if profit > ah.pairs[self.bought_asset_pair.name].fee:
+            self.wins += 1
+        else:
+            self.loss += 1
+
+        self.total_points += profit
+
         with open(self.log_file, "a") as file:
             file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] SOLD\n")
             file.write(self.name + " has sold " + self.bought_asset_pair.base.name)
-            file.write(" for $" + str(self.bought_asset_pair.data.current))
+            file.write(" for $" + str(ah.pairs[self.bought_asset_pair.name].data.current))
             file.write(". Profit was " + str(profit) + "%.\n")
 
         with open(self.detailed_log_file, "a") as file:
@@ -89,5 +105,22 @@ class Player:
             file.write("Profit was " + str(profit) + "%.\n")
             file.write("---------------------------------------------------------------------------\n")
 
+        with open(self.brief_log_file, "a") as file:
+            file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] BRIEF\n")
+            file.write(self.name + f" has {self.wins} wins\n")
+            file.write(self.name + f" has {self.loss} losses\n")
+            file.write(self.name + f" has {self.total_points} points\n")
+            file.write("---------------------------------------------------------------------------\n")
+
         self.bought_asset_pair = None
+
+    def __str__(self : Player) -> str:
+        s = ""
+        s += self.name + "\n"
+        s += self.bs.description + "\n"
+        s += self.ss.description + "\n"
+        s += str(self.bs.cached_data) + "\n"
+        s += str(self.ss.cached_data) + "\n"
+        s += str(self.bought_asset_pair)
+        return s
         

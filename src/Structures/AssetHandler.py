@@ -1,13 +1,13 @@
 from __future__ import annotations
 import time
 
-from typing import Dict
+from typing import Dict, Type
 
 from Structures.Asset import Asset
 import Structures.AssetPair as AP
 from Structures.KrakenAPI import KrakenAPI
 from Structures.Error import Error, ErrorType
-import Structures.Types as Types
+import Structures.Strategy as Strategy
 
 class AssetHandler:
 
@@ -112,7 +112,7 @@ class AssetHandler:
                 total -= 1
                 if total == 0: break
 
-    def get_best_usd_pair(self : AssetHandler, bs : Types.BuyStrategy) -> AP.AssetPair:
+    def get_best_usd_pair(self : AssetHandler, bs : Type[Strategy.BuyStrategy]) -> AP.AssetPair:
         """
         Returns the best USD pair of tradable assets.
 
@@ -130,7 +130,7 @@ class AssetHandler:
         for pair in self.usd_pairs:
             if not self.usd_pairs[pair].is_init: continue
             p = self.usd_pairs[pair]
-            res = bs(p)
+            res = bs.strategy(p)
             
             if max_val == None or max_val < res:
                 max_val = res if max_val == None else max(res, max_val)
@@ -146,6 +146,10 @@ class AssetHandler:
         
         for element in self.pairs:
             s += str(self.pairs[element]) + "\n"
+            s += "-------------------------------------------------\n"
+
+        for element in self.usd_pairs:
+            s += str(self.usd_pairs[element]) + "\n"
             s += "-------------------------------------------------\n"
 
         return s.rstrip("\n")

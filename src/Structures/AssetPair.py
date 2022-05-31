@@ -6,6 +6,8 @@ from Structures.Asset import Asset
 from Structures.AssetPairData import AssetPairData
 import Structures.AssetHandler as AH
 
+from datetime import datetime
+
 class AssetPair:
 
     """
@@ -190,9 +192,24 @@ class AssetPair:
         s += f"Fee: {self.fee}\n"
         s += f"Min order: {self.order_min}\n"
         
-        # for t in self.history:
-        #     date = datetime.fromtimestamp(t).strftime("%A, %B %d, %Y %I:%M:%S")
-        #     s += f"{date}: {self.history[t]}\n"
+        s += str(self.data) + "\n"
+        s += str(self.is_init)
+        return s.rstrip("\n")
+
+    def str(self : AssetPair) -> str:
+        s = ""
+        s += f"Name: {self.name}\n"
+        s += f"Altname: {self.altname}\n"
+        s += f"Wsname: {self.wsname}\n"
+        s += f"Base: {self.base}\n"
+        s += f"Quote: {self.quote}\n"
+        s += f"Fee: {self.fee}\n"
+        s += f"Min order: {self.order_min}\n"
         
-        s += str(self.data)
+        for t in self.history:
+            date = datetime.fromtimestamp(t).strftime("%A, %B %d, %Y %I:%M:%S")
+            s += f"{date}: {self.history[t]}\n"
+        
+        s += str(self.data) + "\n"
+        s += str(self.is_init)
         return s.rstrip("\n")
