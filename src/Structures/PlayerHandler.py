@@ -1,6 +1,7 @@
 from __future__ import annotations
+from datetime import datetime
 import time
-from typing import List, Set, Type
+from typing import List, Set, Tuple, Type
 import glob, importlib, sys
 
 from Structures.AssetHandler import AssetHandler
@@ -17,6 +18,7 @@ class PlayerHandler:
     bsd = "BuyStrategies"
     ssd = "SellStrategies"
     ef : Set[str] = "__init__.py"
+    summary_log_file : str = "Results/summary.res"
 
     def __init__(self : PlayerHandler, ah : AssetHandler, kapi : KrakenAPI) -> PlayerHandler:
         """
@@ -74,7 +76,23 @@ class PlayerHandler:
                     ss : Type[Strategy.SellStrategy] = importlib.import_module(sspn + ssmn).Strategy
 
                     self.players.append(Player(bs, ss))
-    
+
+    def save_best(self : PlayerHandler) -> Tuple[Player, Player, Player]:
+        """
+        """
+        with open(self.summary_log_file, "w") as file:
+            most_losses = sorted(self.players, key=lambda x: x.loss)[0]
+            most_wins = sorted(self.players, key=lambda x: x.wins)[0]
+            best_score = sorted(self.players, key=lambda x: x.total_points)[0]
+            file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] SUMMARY\n")
+            file.write("Most losses: \n")
+            file.write(str(most_losses) + "\n")
+            file.write("Most wins: \n")
+            file.write(str(most_wins) + "\n")
+            file.write("Best score: \n")
+            file.write(str(best_score) + "\n")
+            file.write("---------------------------------------------------------------------------\n")
+
     def play(self : PlayerHandler) -> None:
         """
         A round of play.
@@ -82,13 +100,14 @@ class PlayerHandler:
         try:
             self.ah.update_assets(self.kapi)
             self.ah.update_tradable_assets(self.kapi)
-            self.ah.update_usd_tradable_prices(self.kapi, total=2)
+            self.ah.update_usd_tradable_prices(self.kapi)
             self.generate_players()
             for player in self.players:
                 if player.bought_asset_pair == None:
                     player.buy_asset(self.ah)
                 elif player.should_sell(self.ah):
                     player.sell_asset(self.ah)
+            self.save_best()                
         except Exception as e:
             self.handle_exception(e, sys.exc_info())
 

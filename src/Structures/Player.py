@@ -121,6 +121,9 @@ class Player:
         s += self.ss.description + "\n"
         s += str(self.bs.cached_data) + "\n"
         s += str(self.ss.cached_data) + "\n"
-        s += str(self.bought_asset_pair)
+        s += str(self.bought_asset_pair) + "\n"
+        s += str(self.wins) + "\n"
+        s += str(self.loss) + "\n"
+        s += str(self.total_points)
         return s
         
