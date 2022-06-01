@@ -85,6 +85,7 @@ class PlayerHandler:
             most_losses = sorted(self.players, key=lambda x: x.loss)[-1]
             most_wins = sorted(self.players, key=lambda x: x.wins)[-1]
             best_score = sorted(self.players, key=lambda x: x.total_points)[-1]
+            biggest_wallet = sorted(self.players, key=lambda x: x.wallet)[-1]
             file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] SUMMARY\n")
             file.write("Most losses: \n")
             file.write(str(most_losses) + "\n")
@@ -95,6 +96,9 @@ class PlayerHandler:
             file.write("Best score: \n")
             file.write(str(best_score) + "\n")
             file.write("---------------------------------------------------------------------------\n")
+            file.write("Biggest wallet: \n")
+            file.write(str(biggest_wallet) + "\n")
+            file.write("---------------------------------------------------------------------------\n")
 
     def play(self : PlayerHandler) -> None:
         """
@@ -103,7 +107,7 @@ class PlayerHandler:
         try:
             self.ah.update_assets(self.kapi)
             self.ah.update_tradable_assets(self.kapi)
-            self.ah.update_usd_tradable_prices(self.kapi, total=2)
+            self.ah.update_usd_tradable_prices(self.kapi)
             self.generate_players()
             for player in self.players:
                 if player.bought_asset_pair == None:
