@@ -8,6 +8,7 @@ from Structures.AssetHandler import AssetHandler
 from Structures.Player import Player
 from Structures.KrakenAPI import KrakenAPI
 import Structures.Strategy as Strategy
+from Utils.StringManipulation import tabulate
 
 class PlayerHandler:
 
@@ -81,9 +82,9 @@ class PlayerHandler:
         """
         """
         with open(self.summary_log_file, "w") as file:
-            most_losses = sorted(self.players, key=lambda x: x.loss)[0]
-            most_wins = sorted(self.players, key=lambda x: x.wins)[0]
-            best_score = sorted(self.players, key=lambda x: x.total_points)[0]
+            most_losses = sorted(self.players, key=lambda x: x.loss)[-1]
+            most_wins = sorted(self.players, key=lambda x: x.wins)[-1]
+            best_score = sorted(self.players, key=lambda x: x.total_points)[-1]
             file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] SUMMARY\n")
             file.write("Most losses: \n")
             file.write(str(most_losses) + "\n")
@@ -113,13 +114,15 @@ class PlayerHandler:
 
     def __str__(self : PlayerHandler) -> str:
         s = ""
-        s += str(self.ah) + "\n"
+        s += "Asset handler: \n"
+        s += tabulate(str(self.ah)) + "\n"
         
         for player in self.players:
-            s += str(player) + "\n"
+            s += f"Player {player.name}: \n"
+            s += tabulate(str(player)) + "\n"
 
-        s += str(self.bsm) + "\n"
-        s += str(self.ssm)
+        s += "BuyStrategy modules: " + str(self.bsm) + "\n"
+        s += "SellStrategy modules: " + str(self.ssm)
         return s
 
     def handle_exception(self : PlayerHandler, e : Exception, details) -> None:

@@ -6,6 +6,8 @@ from Structures.Asset import Asset
 from Structures.AssetPairData import AssetPairData
 import Structures.AssetHandler as AH
 
+from Utils.StringManipulation import tabulate
+
 from datetime import datetime
 
 class AssetPair:
@@ -187,13 +189,14 @@ class AssetPair:
         s += f"Name: {self.name}\n"
         s += f"Altname: {self.altname}\n"
         s += f"Wsname: {self.wsname}\n"
-        s += f"Base: {self.base}\n"
-        s += f"Quote: {self.quote}\n"
+        s += f"Base:\n {tabulate(str(self.base))}\n"
+        s += f"Quote:\n {tabulate(str(self.quote))}\n"
         s += f"Fee: {self.fee}\n"
         s += f"Min order: {self.order_min}\n"
         
-        s += str(self.data) + "\n"
-        s += str(self.is_init)
+        s += f"Data about this pair of assets ({self.name}):\n"
+        s += tabulate(str(self.data)) + "\n"
+        s += f"Is init: {self.is_init}"
         return s.rstrip("\n")
 
     def str(self : AssetPair) -> str:
@@ -201,15 +204,17 @@ class AssetPair:
         s += f"Name: {self.name}\n"
         s += f"Altname: {self.altname}\n"
         s += f"Wsname: {self.wsname}\n"
-        s += f"Base: {self.base}\n"
-        s += f"Quote: {self.quote}\n"
+        s += f"Base:\n {tabulate(str(self.base))}\n"
+        s += f"Quote:\n {tabulate(str(self.quote))}\n"
         s += f"Fee: {self.fee}\n"
         s += f"Min order: {self.order_min}\n"
-        
+
+        s += f"History of prices for this pair of assets {self.name}:\n"
         for t in self.history:
             date = datetime.fromtimestamp(t).strftime("%A, %B %d, %Y %I:%M:%S")
-            s += f"{date}: {self.history[t]}\n"
+            s += tabulate(f"{date}: {self.history[t]}") + "\n"
         
-        s += str(self.data) + "\n"
-        s += str(self.is_init)
+        s += f"Data about this pair of assets ({self.name}):\n"
+        s += tabulate(str(self.data)) + "\n"
+        s += f"Is init: {self.is_init}"
         return s.rstrip("\n")

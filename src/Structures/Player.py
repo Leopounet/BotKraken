@@ -9,6 +9,8 @@ import Structures.AssetHandler as AH
 from Structures.Color import Color, random_color
 import Structures.Strategy as Strategy
 
+from Utils.StringManipulation import tabulate
+
 class Player:
 
     """
@@ -60,8 +62,15 @@ class Player:
 
         with open(self.detailed_log_file, "a") as file:
             file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] BUY\n")
-            file.write(self.name + " has bought: ")
+            file.write(self.name + " has bought: \n")
             file.write(str(self.bought_asset_pair) + "\n\n")
+            file.write("---------------------------------------------------------------------------\n")
+
+        with open(self.brief_log_file, "a") as file:
+            file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] BRIEF\n")
+            file.write(self.name + f" has {self.wins} wins\n")
+            file.write(self.name + f" has {self.loss} losses\n")
+            file.write(self.name + f" has {self.total_points} points\n")
             file.write("---------------------------------------------------------------------------\n")
 
     def should_sell(self : Player, ah : AH.AssetHandler) -> None:
@@ -84,6 +93,7 @@ class Player:
 
         profit = ah.pairs[self.bought_asset_pair.name].data.current / self.bought_asset_pair.data.current
         profit = - (1 - profit)
+        profit = profit * 100
 
         if profit > ah.pairs[self.bought_asset_pair.name].fee:
             self.wins += 1
@@ -100,7 +110,7 @@ class Player:
 
         with open(self.detailed_log_file, "a") as file:
             file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] SOLD\n")
-            file.write(self.name + " has sold: ")
+            file.write(self.name + " has sold: \n")
             file.write(str(self.bought_asset_pair) + "\n")
             file.write("Profit was " + str(profit) + "%.\n")
             file.write("---------------------------------------------------------------------------\n")
@@ -116,14 +126,20 @@ class Player:
 
     def __str__(self : Player) -> str:
         s = ""
-        s += self.name + "\n"
-        s += self.bs.description + "\n"
-        s += self.ss.description + "\n"
-        s += str(self.bs.cached_data) + "\n"
-        s += str(self.ss.cached_data) + "\n"
-        s += str(self.bought_asset_pair) + "\n"
-        s += str(self.wins) + "\n"
-        s += str(self.loss) + "\n"
-        s += str(self.total_points)
+        s += "Name: " + self.name + "\n"
+        s += "BuyStrategy description: " + self.bs.description + "\n"
+        s += "SellStrategy description: " + self.ss.description + "\n"
+
+        s += "Buy strategy cached data: \n"
+        s += tabulate(str(self.bs.cached_data)) + "\n"
+
+        s += "Sell strategy cached data: \n"
+        s += tabulate(str(self.ss.cached_data)) + "\n"
+
+        s += "Bought asset pair: \n"
+        s += tabulate(str(self.bought_asset_pair)) + "\n"
+        s += "Wins: " + str(self.wins) + "\n"
+        s += "Losses: " + str(self.loss) + "\n"
+        s += "Total points: " + str(self.total_points)
         return s
         

@@ -9,6 +9,8 @@ from Structures.KrakenAPI import KrakenAPI
 from Structures.Error import Error, ErrorType
 import Structures.Strategy as Strategy
 
+from Utils.StringManipulation import tabulate
+
 class AssetHandler:
 
     """
@@ -141,15 +143,18 @@ class AssetHandler:
     def __str__(self : AssetHandler) -> str:
         s = "Assets:\n"
         for element in self.assets:
-            s += str(self.assets[element]) + "\n"
+            s += f"Asset {self.assets[element].name}: \n"
+            s += tabulate(str(self.assets[element])) + "\n"
             s += "-------------------------------------------------\n"
         
         for element in self.pairs:
-            s += str(self.pairs[element]) + "\n"
+            s += f"Asset {self.pairs[element].name}: \n"
+            s += tabulate(str(self.pairs[element])) + "\n"
             s += "-------------------------------------------------\n"
 
         for element in self.usd_pairs:
-            s += str(self.usd_pairs[element]) + "\n"
+            s += f"Asset {self.usd_pairs[element].name}: \n"
+            s += tabulate(str(self.usd_pairs[element])) + "\n"
             s += "-------------------------------------------------\n"
 
         return s.rstrip("\n")

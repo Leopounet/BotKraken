@@ -51,8 +51,8 @@ class Asset:
         return a
 
     def __str__(self : Asset) -> str:
-        s = f"Name = {self.name}\n"
-        s += f"Altname = {self.altname}\n"
-        s += f"decimals = {self.decimals}\n"
-        s += f"displayed_decimals = {self.display_decimals}"
+        s = f"Name: {self.name}\n"
+        s += f"Altname: {self.altname}\n"
+        s += f"decimals: {self.decimals}\n"
+        s += f"displayed_decimals: {self.display_decimals}"
         return s
