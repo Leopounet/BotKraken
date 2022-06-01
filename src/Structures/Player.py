@@ -93,9 +93,9 @@ class Player:
 
         profit = ah.pairs[self.bought_asset_pair.name].data.current / self.bought_asset_pair.data.current
         profit = - (1 - profit)
-        profit = profit * 100
+        profit = profit * 100 - ah.pairs[self.bought_asset_pair.name].fee
 
-        if profit > ah.pairs[self.bought_asset_pair.name].fee:
+        if profit > 0:
             self.wins += 1
         else:
             self.loss += 1
