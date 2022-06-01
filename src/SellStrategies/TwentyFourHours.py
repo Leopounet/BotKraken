@@ -10,7 +10,7 @@ from typing import Dict, Any
 
 class Strategy(SellStrategy):
 
-    name : str = "Twenty-four hours."
+    name : str = "Twenty-four hours"
     description : str = "Sells when it has been 24h."
 
     @staticmethod

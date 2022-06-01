@@ -14,7 +14,7 @@ from typing import Dict, Any
 class Strategy(SellStrategy):
 
     cached_data : Dict[str, Dict[str, Any]] = {}
-    name : str = "Twenty-four hours or ten percent decreasing."
+    name : str = "Twenty-four hours or ten percent decreasing"
     description : str = "Sells when the profit is 10% and the \
 price is decreasing or it has been 24h."
 

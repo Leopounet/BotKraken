@@ -41,6 +41,7 @@ class Player:
         self.wins : int = 0
         self.loss : int = 0
         self.total_points : float = 0
+        self.wallet : float = 10000
 
     def buy_asset(self : Player, ah : AH.AssetHandler) -> None:
         """
@@ -59,11 +60,14 @@ class Player:
             file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] BUY\n")
             file.write(self.name + " has bought " + self.bought_asset_pair.base.name)
             file.write(" for $" + str(self.bought_asset_pair.data.current) + "\n")
+            file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
+            file.write("---------------------------------------------------------------------------\n")
 
         with open(self.detailed_log_file, "a") as file:
             file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] BUY\n")
             file.write(self.name + " has bought: \n")
             file.write(str(self.bought_asset_pair) + "\n\n")
+            file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
             file.write("---------------------------------------------------------------------------\n")
 
         with open(self.brief_log_file, "a") as file:
@@ -71,6 +75,7 @@ class Player:
             file.write(self.name + f" has {self.wins} wins\n")
             file.write(self.name + f" has {self.loss} losses\n")
             file.write(self.name + f" has {self.total_points} points\n")
+            file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
             file.write("---------------------------------------------------------------------------\n")
 
     def should_sell(self : Player, ah : AH.AssetHandler) -> None:
@@ -93,7 +98,7 @@ class Player:
 
         profit = ah.pairs[self.bought_asset_pair.name].data.current / self.bought_asset_pair.data.current
         profit = - (1 - profit)
-        profit = profit * 100 - ah.pairs[self.bought_asset_pair.name].fee
+        profit = profit * 100 - ah.pairs[self.bought_asset_pair.name].fee * 2
 
         if profit > 0:
             self.wins += 1
@@ -101,18 +106,22 @@ class Player:
             self.loss += 1
 
         self.total_points += profit
+        self.wallet = self.wallet + (profit / 100) * self.wallet
 
         with open(self.log_file, "a") as file:
             file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] SOLD\n")
             file.write(self.name + " has sold " + self.bought_asset_pair.base.name)
             file.write(" for $" + str(ah.pairs[self.bought_asset_pair.name].data.current))
             file.write(". Profit was " + str(profit) + "%.\n")
+            file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
+            file.write("---------------------------------------------------------------------------\n")
 
         with open(self.detailed_log_file, "a") as file:
             file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] SOLD\n")
             file.write(self.name + " has sold: \n")
             file.write(str(self.bought_asset_pair) + "\n")
             file.write("Profit was " + str(profit) + "%.\n")
+            file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
             file.write("---------------------------------------------------------------------------\n")
 
         with open(self.brief_log_file, "a") as file:
@@ -120,6 +129,7 @@ class Player:
             file.write(self.name + f" has {self.wins} wins\n")
             file.write(self.name + f" has {self.loss} losses\n")
             file.write(self.name + f" has {self.total_points} points\n")
+            file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
             file.write("---------------------------------------------------------------------------\n")
 
         self.bought_asset_pair = None
@@ -140,6 +150,7 @@ class Player:
         s += tabulate(str(self.bought_asset_pair)) + "\n"
         s += "Wins: " + str(self.wins) + "\n"
         s += "Losses: " + str(self.loss) + "\n"
-        s += "Total points: " + str(self.total_points)
+        s += "Total points: " + str(self.total_points) + "%\n"
+        s += "Wallet: " + str(self.wallet)
         return s
         

@@ -12,7 +12,7 @@ from typing import Dict, Any
 
 class Strategy(SellStrategy):
 
-    name : str = "Ten percent decreasing."
+    name : str = "Ten percent decreasing"
     description : str = "Sells when the profit is 10% and the price is decreasing."
 
     @staticmethod

@@ -13,7 +13,7 @@ from typing import Dict, Any
 
 class Strategy(SellStrategy):
 
-    name : str = "Twenty-four hours or ten percent."
+    name : str = "Twenty-four hours or ten percent"
     description : str = "Sells when the profit is 10% or it has been 24h."
 
     @staticmethod
