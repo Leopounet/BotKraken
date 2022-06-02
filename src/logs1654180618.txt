@@ -1,7 +1,0 @@
-unsupported operand type(s) for -: 'NoneType' and 'NoneType'
-<class 'TypeError'>
-unsupported operand type(s) for -: 'NoneType' and 'NoneType'
-<frame at 0xffff973b8040, file '/home/ubuntu/BotKraken/src/Structures/PlayerHandler.py', line 119, code play>
-80
-114
-
