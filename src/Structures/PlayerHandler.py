@@ -1,5 +1,6 @@
 from __future__ import annotations
 from datetime import datetime
+import traceback
 import time
 from typing import List, Set, Tuple, Type
 import glob, importlib, sys
@@ -131,7 +132,7 @@ class PlayerHandler:
         s += "SellStrategy modules: " + str(self.ssm)
         return s
 
-    def handle_exception(self : PlayerHandler, e : Exception, details) -> None:
+    def handle_exception(self : PlayerHandler, e : Exception, details : sys._OptExcInfo) -> None:
         """
         Handles an exception, if one happens.
         """
@@ -140,9 +141,11 @@ class PlayerHandler:
             type, value, traceback = details
             file.write(str(type) + "\n")
             file.write(str(value) + "\n")
+            file.write(str(traceback) + "\n")
             file.write(str(traceback.tb_frame) + "\n")
             file.write(str(traceback.tb_lasti) + "\n")
             file.write(str(traceback.tb_lineno) + "\n\n")
+            print(str(traceback))
 
             file.write(str(self))
             file.write("\n\n\n--------------------------------------------------------------")

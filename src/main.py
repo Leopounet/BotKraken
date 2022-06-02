@@ -1,6 +1,8 @@
 from __future__ import annotations
 import os
+import sys
 import time
+import traceback
 
 from Structures.KrakenAPI import KrakenAPI
 from Structures.AssetHandler import AssetHandler
@@ -36,8 +38,19 @@ if __name__ == "__main__":
     ph.generate_players()
 
     while True:
-        ph.play()
-        time.sleep(120)
+        try:
+            ph.play()
+            time.sleep(120)
+        except Exception as e:
+            with open("very_bad_error.txt", "a") as file:
+                type, value, tr = sys.exc_info()
+                file.write(str(e) + "\n")
+                file.write(str(type) + "\n")
+                file.write(str(value) + "\n")
+                file.write(str(tr) + "\n")
+                file.write(str(tr.tb_frame) + "\n")
+                file.write(str(tr.tb_lasti) + "\n")
+                file.write(str(tr.tb_lineno) + "\n\n")
 
         
 
