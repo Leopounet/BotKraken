@@ -19,4 +19,4 @@ class Strategy(SellStrategy):
     @staticmethod
     def strategy(player : Player, ap : AssetPair) -> float:
         Strategy.optional[Strategy.name] = [TFH, TP]
-        return Strategy.get_all(Strategy.name, player, ap, False)
+        return Strategy.get_all(Strategy.name, player, ap, True)

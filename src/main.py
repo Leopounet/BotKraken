@@ -40,7 +40,10 @@ if __name__ == "__main__":
     while True:
         try:
             ph.play()
-            time.sleep(120)
+            for i in range(100):
+                time.sleep(1)
+                execute_commands()
+            time.sleep(20)
         except Exception as e:
             with open("very_bad_error.txt", "a") as file:
                 type, value, tr = sys.exc_info()

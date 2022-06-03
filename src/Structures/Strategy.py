@@ -48,16 +48,16 @@ class SellStrategy:
 
     @staticmethod
     def get_optional(s_name : str, player : Player.Player, ap : AssetPair) -> bool:
-        if not s_name in SellStrategy.optional: return False
+        if not s_name in SellStrategy.optional: return True
         optional = SellStrategy.optional[s_name]
         for f in optional:
-            if not f.strategy(player, ap): return True
+            if f.strategy(player, ap): return True
         return False
 
     @staticmethod
     def get_all(s_name : str, player : Player.Player, ap : AssetPair, res : bool) -> bool:
-        return (SellStrategy.get_mandatory(s_name, player, ap) and 
-                (SellStrategy.get_optional(s_name, player, ap) or res))
+        return (SellStrategy.get_mandatory(s_name, player, ap) and res and 
+                (SellStrategy.get_optional(s_name, player, ap)))
 
     @staticmethod
     def strategy(player : Player.Player, ap : AssetPair)  -> bool:

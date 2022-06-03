@@ -21,4 +21,4 @@ price is decreasing or it has been 24h."
     @staticmethod
     def strategy(player : Player, ap : AssetPair) -> float:
         Strategy.optional[Strategy.name] = [TFH, TPD]
-        return Strategy.get_all(Strategy.name, player, ap, False)
+        return Strategy.get_all(Strategy.name, player, ap, True)

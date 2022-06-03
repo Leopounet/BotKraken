@@ -94,7 +94,7 @@ class AssetHandler:
                 return None
 
             self.pairs[pair].update_prices(result[pair])
-            self.pairs[pair].update_data(self.pairs[pair].quote != "ZUSD" and self.pairs[pair].quote != "USD")
+            self.pairs[pair].update_data(self.pairs[pair].quote.name != "ZUSD" and self.pairs[pair].quote.name != "USD")
         else:
             for p in self.usd_pairs:
                 # print(p)
@@ -109,7 +109,7 @@ class AssetHandler:
                     return None
 
                 self.pairs[p].update_prices(result[p])
-                self.pairs[p].update_data(self.pairs[p].quote != "ZUSD" and self.pairs[p].quote != "USD")
+                self.pairs[p].update_data(self.pairs[p].quote.name != "ZUSD" and self.pairs[p].quote.name != "USD")
 
                 total -= 1
                 if total == 0: break
