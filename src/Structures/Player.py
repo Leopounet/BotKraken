@@ -63,12 +63,12 @@ class Player:
             file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
             file.write("---------------------------------------------------------------------------\n")
 
-        with open(self.detailed_log_file, "a") as file:
-            file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] BUY\n")
-            file.write(self.name + " has bought: \n")
-            file.write(str(self.bought_asset_pair) + "\n\n")
-            file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
-            file.write("---------------------------------------------------------------------------\n")
+        # with open(self.detailed_log_file, "a") as file:
+        #     file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] BUY\n")
+        #     file.write(self.name + " has bought: \n")
+        #     file.write(str(self.bought_asset_pair) + "\n\n")
+        #     file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
+        #     file.write("---------------------------------------------------------------------------\n")
 
         with open(self.brief_log_file, "a") as file:
             file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] BRIEF\n")
@@ -116,13 +116,13 @@ class Player:
             file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
             file.write("---------------------------------------------------------------------------\n")
 
-        with open(self.detailed_log_file, "a") as file:
-            file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] SOLD\n")
-            file.write(self.name + " has sold: \n")
-            file.write(str(self.bought_asset_pair) + "\n")
-            file.write("Profit was " + str(profit) + "%.\n")
-            file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
-            file.write("---------------------------------------------------------------------------\n")
+        # with open(self.detailed_log_file, "a") as file:
+        #     file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] SOLD\n")
+        #     file.write(self.name + " has sold: \n")
+        #     file.write(str(self.bought_asset_pair) + "\n")
+        #     file.write("Profit was " + str(profit) + "%.\n")
+        #     file.write(f"{self.name} now has $" + str(self.wallet) + "\n")
+        #     file.write("---------------------------------------------------------------------------\n")
 
         with open(self.brief_log_file, "a") as file:
             file.write("[" + datetime.today().strftime('%Y-%m-%d %H:%M:%S') + "] BRIEF\n")
