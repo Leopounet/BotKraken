@@ -14,8 +14,13 @@ while IFS= read -r line; do
 	if [[ "$line" =~ "[".* ]]; then
 		to_write+=("$line")
 	else
-		echo "$line" >> $command_file
-		to_write+=("[$(date +%F_%H-%M-%S)] $line")
+		if [[ "$line" = "START" ]]; then
+			to_write+=("[$(date +%F_%H-%M-%S)] $line")
+			python3 main.py &
+		else
+			echo "$line" >> $command_file
+			to_write+=("[$(date +%F_%H-%M-%S)] $line")
+		fi
 	fi
 done < "$rcv_command_file"
 
@@ -24,8 +29,8 @@ for line in "${to_write[@]}"; do
 done
 
 line=~/BotKrakenCommands/
-#git -C "$line" rm --cached "$line/*" > /dev/null 2>&1
-#git -C "$line" add "$line/*"
-#git -C "$line" add -u
-#git -C "$line" commit -m "Auto-push!"
-#git -C "$line" push
+git -C "$line" rm --cached "$line/*" > /dev/null 2>&1
+git -C "$line" add "$line/*"
+git -C "$line" add -u
+git -C "$line" commit -m "Auto-push!"
+git -C "$line" push

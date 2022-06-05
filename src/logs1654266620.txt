@@ -1,8 +1,0 @@
-[Errno 5] Input/output error
-<class 'OSError'>
-[Errno 5] Input/output error
-<traceback object at 0xffff93da09c0>
-<frame at 0xffff93880230, file '/home/ubuntu/BotKraken/src/Structures/PlayerHandler.py', line 120, code play>
-40
-111
-

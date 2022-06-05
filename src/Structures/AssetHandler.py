@@ -88,7 +88,7 @@ class AssetHandler:
             if isinstance(result, Error):
                 print("An error occurred!")
                 with open(self.log_file, "a") as file:
-                    file.write(result.error.value + " : " + result.msg + "\n")
+                    file.write(str(result.error.value) + " : " + str(result.msg) + "\n")
                 if result.error == ErrorType.RATE_LIMIT:
                     time.sleep(200)
                 return None
