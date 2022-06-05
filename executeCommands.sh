@@ -16,7 +16,7 @@ while IFS= read -r line; do
 	else
 		if [[ "$line" = "START" ]]; then
 			to_write+=("[$(date +%F_%H-%M-%S)] $line")
-			python3 main.py &
+			python3 src/main.py &
 		else
 			echo "$line" >> $command_file
 			to_write+=("[$(date +%F_%H-%M-%S)] $line")
