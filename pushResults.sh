@@ -6,6 +6,5 @@ git -C "$line" rm --cached "$line/*" > /dev/null 2>&1
 git -C "$line" add "$line/*"
 git -C "$line" add -u
 git -C "$line" commit -m "Auto-push!"
-git -C "$line" commit -m "$1"
 git -C "$line" push
 
