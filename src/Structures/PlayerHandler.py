@@ -108,7 +108,7 @@ class PlayerHandler:
         try:
             self.ah.update_assets(self.kapi)
             self.ah.update_tradable_assets(self.kapi)
-            self.ah.update_usd_tradable_prices(self.kapi, total=2)
+            self.ah.update_usd_tradable_prices(self.kapi)
             self.generate_players()
             for player in self.players:
                 if player.bought_asset_pair == None:

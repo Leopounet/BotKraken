@@ -43,11 +43,8 @@ if __name__ == "__main__":
     while True:
         try:
             ph.play()
-            print("Done")
             execute_command(__file__, kapi, ah, ph)
-            print("Stop")
-            time.sleep(5)
-            print("Redo")
+            time.sleep(60)
         except Exception as e:
             with open("very_bad_error.txt", "a") as file:
                 type, value, tr = sys.exc_info()
