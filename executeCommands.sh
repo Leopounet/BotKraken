@@ -1,5 +1,6 @@
 #!/bin/bash
-command_file="commands.cmd"
+# source /home/ubuntu/.bashrc
+command_file="/home/ubuntu/BotKraken/commands.cmd"
 rcv_command_file="/home/ubuntu/BotKrakenCommands/commands.cmd"
 
 git -C ~/BotKrakenCommands/ pull
@@ -16,9 +17,12 @@ while IFS= read -r line; do
 	else
 		if [[ "$line" = "START" ]]; then
 			to_write+=("[$(date +%F_%H-%M-%S)] $line")
-			cd src/
-			python3 main.py &
-			cd ..
+			res=$(ps aux --no-heading | grep main.py | wc -l)
+			if [[ $res -eq 1 ]]; then
+        			cd /home/ubuntu/BotKraken/src/
+                        	python3 main.py &
+                        	cd ../../../../
+			fi
  		else
 			echo "$line" >> $command_file
 			to_write+=("[$(date +%F_%H-%M-%S)] $line")
